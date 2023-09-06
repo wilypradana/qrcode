@@ -47,14 +47,14 @@ $query = query("SELECT * FROM user WHERE kode='$kodeid'")[0];
                 <h4 class="mb-3 mt-3"><?= $query["nama"] ?></h4>
              
 
-                <button class="btn btn-primary btn-sm follow">Absen</button>
+                <a href="absen.php?nip=<?= $query["nip"] ?>" class="btn btn-primary btn-sm follow">Absen</a>
 
 
                 <div class="d-flex justify-content-between align-items-center mt-4 px-4">
 
                   <div class="stats">
                     <h6 class="mb-0">nip</h6>
-                    <span><?= $query["nip"] ?></span>
+                    <span><?= $query["kode"] ?></span>
 
                   </div>
 
