@@ -5,9 +5,8 @@ $server = "localhost"; $username = "root"; $password = ""; $database = "qrcode";
 $koneksi = mysqli_connect($server, $username, $password, $database); 
 // Return current date from the remote server
 date_default_timezone_set('Asia/jakarta');
-$date = date('d-m-y h:i:s');
-
-   
+$date = date('Y-m-d H:i:s');
+ 
 
 $query = "SELECT * FROM user WHERE nip = $nipid";
 $result = mysqli_query($koneksi, $query);
@@ -32,5 +31,5 @@ WHERE nip = $nipid";
 mysqli_query($koneksi, $queryUpdate);
 mysqli_query($koneksi, $queryInsert);
 
-header("Location: detail.php")
+header("Location: detail.php?text=$nipid")
 ?>

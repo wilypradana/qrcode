@@ -5,8 +5,8 @@ require "insert.php";
 
 
 // Redirect ke halaman detail.php sambil kirim URL gambar
-$kodeid = strval($_POST["text"]);
-$query = query("SELECT * FROM user WHERE kode='$kodeid'")[0];
+$nip = strval($_GET["text"]);
+$query = query("SELECT * FROM user WHERE nip='$nip'")[0];
 
 
 ?>
