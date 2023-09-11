@@ -17,10 +17,9 @@
 
         </div>
         <div class="col-md-6">
-            <form action="detail.php" method="post" id="form">
+            <form action="pages/detail.php" method="get" id="form">
             <label>SCAN QR CODE</label>
             <input type="text" name="text" id="text" readonly placeholder="Scan QR code" class="form-control">
-            <input type="hidden" name="photo" id="photo">
                     </form>
         </div>
     </div>
@@ -31,6 +30,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/instascan/1.0.0/instascan.min.js" integrity="sha512-QblNATV/gin5FC8tqTM2gfCMBei2qCzTte4O6CxGp8KQ5BgC5vNNGv99uTBvzmq+AFFYFoUNhowGOOJNTIBy6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
-<script> let scanner = new Instascan.Scanner({ video: document.getElementById("preview") }); Instascan.Camera.getCameras().then(function (cameras) { if (cameras.length > 0) { scanner.start(cameras[0]); } else { alert("No cameras found"); } }).catch(function (e) { console.error(e); }); scanner.addListener("scan", function (content) { document.getElementById("text").value = content; document.forms[0].submit() }); </script>
+<script>
+ let scanner = new Instascan.Scanner({ video: document.getElementById("preview") }); Instascan.Camera.getCameras().then(function (cameras) { if (cameras.length > 0) { scanner.start(cameras[0]); } else { alert("No cameras found"); } }).catch(function (e) { console.error(e); }); scanner.addListener("scan", function (content) { document.getElementById("text").value = content; document.forms[0].submit() }); </script>
 </body>
 </html>
