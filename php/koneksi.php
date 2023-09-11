@@ -18,5 +18,32 @@ function query($query) {
     }
     return $users;
 }
+function querySudahAbsen($query) {
+    global $koneksi;
+    $result = mysqli_query($koneksi, $query);
+    $users = [];
+    while($row = mysqli_fetch_assoc($result)){
+      $users[] = $row;
+    }
+    return $users;
+}
+function queryBelumAbsen($query) {
+    global $koneksi;
+    $result = mysqli_query($koneksi, $query);
+    $users = [];
+    while($row = mysqli_fetch_assoc($result)){
+      $users[] = $row;
+    }
+    return $users;
+}
+function querySudahAbsenTable($query) {
+    global $koneksi;
+    $result = mysqli_query($koneksi, $query);
+    $users = [];
+    while($row = mysqli_fetch_assoc($result)){
+      $users[] = $row;
+    }
+    return $users;
+}
 
 ?>
