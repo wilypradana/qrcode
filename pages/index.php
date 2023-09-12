@@ -22,7 +22,7 @@ WHERE status='belum absen'")[0]["COUNT(*)"];
 if ( isset($_POST["filter"]) ) {
    $dari_tanggal = $_POST["dari_tgl"];
    $sampai_tanggal = $_POST["sampai_tgl"];
-   $filter = mysqli_query($koneksi, "SELECT * FROM user WHERE left(jam, 10) BETWEEN '$dari_tanggal' and '$sampai_tanggal'");
+   $filter = mysqli_query($koneksi, "SELECT * FROM user_history WHERE left(jam, 10) BETWEEN '$dari_tanggal' and '$sampai_tanggal'");
 }
 
 ?>
@@ -246,8 +246,13 @@ if ( isset($_POST["filter"]) ) {
                       <?php foreach ($filter as $filteras) : ?>
                       <tr>
                         <td><?= $filteras["nama"] ?></td>
-                        <td class="d-none d-xl-filter-cell"><?= $filteras["jam"] ?></td>
+                        <td class="d-xl-filter-cell"><?= $filteras["jam"] ?></td>
+                        <?php if ($filteras["status"] === "sudah absen") : ?>
                         <td><span class="badge bg-success"><?= $filteras["status"] ?></span></td>
+                        <?php endif; ?>
+                        <?php if ($filteras["status"] === "belum absen") : ?>
+                        <td><span class="badge bg-danger"><?= $filteras["status"] ?></span></td>
+                        <?php endif; ?>
                       </tr>
                       <?php endforeach; ?>
                     </tbody>
@@ -269,7 +274,7 @@ if ( isset($_POST["filter"]) ) {
 						<div class="col-6 text-end">
 							<ul class="list-inline">
 								<li class="list-inline-item">
-									<button class="btn btn-warning">Reset data</button>
+									<a  href="../reset.php" class="btn btn-warning">Reset data</a>
 								</li>
 							</ul>
 						</div>
