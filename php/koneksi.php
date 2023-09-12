@@ -1,49 +1,39 @@
 <?php 
-error_reporting(E_ALL); ini_set('display_errors', '1'); 
-
-// // Return current date from the remote server
-// date_default_timezone_set('Asia/jakarta');
-// $date = date('d-m-y h:i:s');
-// echo $date;
-
 $server = "localhost"; $username = "root"; $password = ""; $database = "qrcode"; 
 $koneksi = mysqli_connect($server, $username, $password, $database); 
-// query menggunakan kolom 'kode' bukan 'kodeid'
-function query($query) {
+
+
+function registrasi($data) {
     global $koneksi;
-    $result = mysqli_query($koneksi, $query);
-    $users = [];
-    while($row = mysqli_fetch_assoc($result)){
-      $users[] = $row;
-    }
-    return $users;
+
+   $username =   strtolower(stripslashes($data["name"])); 
+   $password = mysqli_escape_string($koneksi, $data["password"]);
+   $password2 = mysqli_escape_string($koneksi, $data["password2"]);
+
+
+    $result = mysqli_query($koneksi, "SELECT username FROM admin WHERE username = '$username'");
+    
+   if ( mysqli_fetch_assoc($result) ) {
+      echo "username telah digunakan";
+      exit;
+   }
+
+   if (  $password !== $password2 ) {
+      echo "
+      <script>
+            alert('Password tidak sesuai')
+      </script>
+      ";
+      return false;
+   }
+
+
+   $password = password_hash($password, PASSWORD_DEFAULT);
+
+   mysqli_query($koneksi, "INSERT INTO  admin (username, password) VALUES ('$username', '$password')");
+
+   return mysqli_affected_rows($koneksi);
 }
-function querySudahAbsen($query) {
-    global $koneksi;
-    $result = mysqli_query($koneksi, $query);
-    $users = [];
-    while($row = mysqli_fetch_assoc($result)){
-      $users[] = $row;
-    }
-    return $users;
-}
-function queryBelumAbsen($query) {
-    global $koneksi;
-    $result = mysqli_query($koneksi, $query);
-    $users = [];
-    while($row = mysqli_fetch_assoc($result)){
-      $users[] = $row;
-    }
-    return $users;
-}
-function querySudahAbsenTable($query) {
-    global $koneksi;
-    $result = mysqli_query($koneksi, $query);
-    $users = [];
-    while($row = mysqli_fetch_assoc($result)){
-      $users[] = $row;
-    }
-    return $users;
-}
+
 
 ?>

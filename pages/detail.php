@@ -1,11 +1,24 @@
 <?php 
 
-require "../php/koneksi.php";
+require "../php/query.php";
 
 $kode = strval($_GET["text"]);
-$query = query("SELECT * FROM user WHERE kode='$kode'")[0];
-// var_dump($query); die;
 
+$query = query("SELECT * FROM user WHERE kode='$kode'")[0];
+if ( $query <= 1 ) {
+  echo "<p>id qrcode dengan nomor $kode tidak ada</p>";
+  echo"<br>";
+  echo "<p>Kamu akan terdirect kembali selama 10 detik pastikan kode mu benar ya</p>";
+  echo"
+  <script>
+setTimeout(function(){
+  window.location.href = '../';
+}, 10000);
+</script>
+  ";
+
+  exit;
+}
 ?>
 
 <!DOCTYPE html>

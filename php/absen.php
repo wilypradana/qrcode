@@ -1,5 +1,6 @@
 <?php error_reporting(E_ALL); ini_set('display_errors', '1'); 
 // main file php
+require_once "../php/koneksi.php";
 $kodeid = $_GET["kode"];
 $server = "localhost"; $username = "root"; $password = ""; $database = "qrcode"; 
 $koneksi = mysqli_connect($server, $username, $password, $database); 
